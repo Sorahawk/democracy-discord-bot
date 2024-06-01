@@ -3,7 +3,6 @@ import global_constants, os, re
 from global_constants import *
 
 
-
 # initialises an empty file if the specified file does not already exist
 def initialise_file_if_empty(entity_type):
 	if not os.path.exists(FILE_NAMES[entity_type]):

@@ -6,7 +6,7 @@ from helper_functions import *
 from discord.ext.tasks import loop
 
 
-
+# outputs new major orders, updates expiry time of existing major orders, and sends results of expired major orders
 async def check_major_order(order_details):
 	if order_details:
 		order_details = order_details[0]
@@ -82,6 +82,7 @@ async def check_major_order(order_details):
 	global_constants.MAJOR_ORDER_MESSAGE = None
 
 
+# outputs new global events
 async def check_global_event(war_status):
 	if not war_status['globalEvents']:
 		return
@@ -107,6 +108,7 @@ async def check_global_event(war_status):
 		await send_formed_message(message, 'global_event_new')
 
 
+# outputs new dispatches
 async def check_dispatch(dispatches):
 	if not dispatches:
 		return

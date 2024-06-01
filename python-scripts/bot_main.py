@@ -8,7 +8,6 @@ from helper_functions import *
 from discord import Activity, Client, Intents
 
 
-
 # declare bot intents
 # all() enables everything, including the privileged intents: presences, members and message_content
 intents = Intents.all()

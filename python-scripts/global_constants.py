@@ -1,7 +1,6 @@
 from sys import platform
 
 
-
 ### DISCORD ###
 
 # ID of default Discord server channel that will receive notifications
