@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/Sorahawk/democracy-officer-bot/">
-    <img src="images/democarcy-officer.png" alt="Project Logo" width="400" height="400">
+    <img src="images/democracy-officer.png" alt="Project Logo" width="400" height="400">
   </a>
   <h3 align="center">Helldivers 2 - Democracy Officer Bot</h3>
   <p align="center">
