@@ -1,0 +1,6 @@
+__pycache__/
+
+python-scripts/secrets.py
+
+data-files/*.txt
+data-files/latest_global_event.json

@@ -1,0 +1,14 @@
+# goes into /etc/systemd/system folder in Ubuntu to run Python script as a service
+
+
+[Unit]
+Description=Democracy Officer Discord Bot
+After=multi-user.target
+
+[Service]
+User=ubuntu
+ExecStart=/usr/bin/python3 /home/ubuntu/democracy-bot/python-scripts/bot_main.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
