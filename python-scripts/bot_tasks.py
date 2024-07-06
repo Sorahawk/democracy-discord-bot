@@ -27,7 +27,10 @@ async def check_major_order(order_details):
 		expiry_timestamp = int(time.time()) + order_details['expiresIn']
 		discord_timestamp = f"<t:{expiry_timestamp}:F>"
 
-		brief = order_details['setting']['overrideBrief']
+		brief = ''
+		if 'overrideBrief' in order_details['setting']:  # the overrideBrief value is somehow not returned in the response every now and then
+			brief = order_details['setting']['overrideBrief']
+
 		task_description = order_details['setting']['taskDescription']
 
 		message = f"\n{brief}\n\n{task_description}\n\n".replace('\n', '\n> ')
@@ -52,7 +55,7 @@ async def check_major_order(order_details):
 				outfile.write(f"{order_id}, {sent_message.id}")
 		return
 
-	# if no major order active, then
+	# if not order_details (no major order active), then code below executes
 	if not global_constants.MAJOR_ORDER_ID:
 		return
 
