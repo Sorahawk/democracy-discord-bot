@@ -27,11 +27,14 @@ async def check_major_order(order_details):
 		expiry_timestamp = int(time.time()) + order_details['expiresIn']
 		discord_timestamp = f"<t:{expiry_timestamp}:F>"
 
+		# the overrideBrief and taskDescription values are somehow not returned in the response every now and then
 		brief = ''
-		if 'overrideBrief' in order_details['setting']:  # the overrideBrief value is somehow not returned in the response every now and then
+		if 'overrideBrief' in order_details['setting']:
 			brief = order_details['setting']['overrideBrief']
 
-		task_description = order_details['setting']['taskDescription']
+		task_description = ''
+		if 'taskDescription' in order_details['setting']:
+			task_description = order_details['setting']['taskDescription']
 
 		message = f"\n{brief}\n\n{task_description}\n\n".replace('\n', '\n> ')
 		message = convert_tags_to_bold(message)
