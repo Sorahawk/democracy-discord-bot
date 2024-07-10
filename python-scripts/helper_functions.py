@@ -24,8 +24,8 @@ async def send_formed_message(message, header_voiceline_key):
 
 
 # standard task error handler
-async def error_handler(exception, entity_type, payload):
-	await global_constants.MAIN_CHANNEL.send(f"Unexpected error in `check_{entity_type}()`: {exception}")
+async def error_handler(traceback_error, entity_type, payload):
+	await global_constants.MAIN_CHANNEL.send(f"Unexpected error in `check_{entity_type}()`: {traceback_error}")
 	await global_constants.MAIN_CHANNEL.send(f"Payload: ```{payload}```")
 
 	# stop task from re-execution after one retry

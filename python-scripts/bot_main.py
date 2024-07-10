@@ -1,4 +1,4 @@
-import global_constants, json
+import global_constants, json, traceback
 
 from secrets import *
 from bot_tasks import *
@@ -26,8 +26,9 @@ async def task_check_major_order():
 		await check_major_order(order_details)
 		await error_recovery('major_order')
 
-	except Exception as e:
-		if await error_handler(e, 'major_order', order_details):
+	except:
+		error = traceback.format_exc()
+		if await error_handler(error, 'major_order', order_details):
 			check_major_order.stop()
 
 
@@ -40,8 +41,9 @@ async def task_check_global_event():
 		await check_global_event(war_status)
 		await error_recovery('global_event')
 
-	except Exception as e:
-		if await error_handler(e, 'global_event', war_status):
+	except:
+		error = traceback.format_exc()
+		if await error_handler(error, 'global_event', war_status):
 			check_global_event.stop()
 
 
@@ -54,8 +56,9 @@ async def task_check_dispatch():
 		await check_dispatch(dispatches)
 		await error_recovery('dispatch')
 
-	except Exception as e:
-		if await error_handler(e, 'dispatch', dispatches):
+	except:
+		error = traceback.format_exc()
+		if await error_handler(error, 'dispatch', dispatches):
 			check_dispatch.stop()
 
 
