@@ -21,6 +21,7 @@ global_constants.BOT_INSTANCE = bot
 async def task_check_major_order():
 	endpoint = f"{BASE_API_URL}/v2/Assignment/War/{WAR_ID}"
 
+	order_details = 'NO RESPONSE'
 	try:
 		order_details = requests.get(endpoint, headers=STANDARD_HEADERS).json()
 		await check_major_order(order_details)
@@ -36,6 +37,7 @@ async def task_check_major_order():
 async def task_check_global_event():
 	endpoint = f"{BASE_API_URL}/WarSeason/{WAR_ID}/Status"
 
+	war_status = 'NO RESPONSE'
 	try:
 		war_status = requests.get(endpoint, headers=STANDARD_HEADERS).json()
 		await check_global_event(war_status)
@@ -51,6 +53,7 @@ async def task_check_global_event():
 async def task_check_dispatch():
 	endpoint = f"{BASE_API_URL}/NewsFeed/{WAR_ID}?fromTimeStamp={global_constants.LATEST_DISPATCH_TIMESTAMP}"
 
+	dispatches = 'NO RESPONSE'
 	try:
 		dispatches = requests.get(endpoint, headers=STANDARD_HEADERS).json()
 		await check_dispatch(dispatches)
