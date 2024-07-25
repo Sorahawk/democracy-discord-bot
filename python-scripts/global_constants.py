@@ -51,6 +51,9 @@ MAJOR_ORDER_PAYLOAD = None
 # i.e. the expiry time given when the major order is issued is almost always slightly off from the time it actually ends up expiring at
 MAJOR_ORDER_MESSAGE = None
 
+# string of the latest event
+LATEST_EVENT_STRING = None
+
 # list of names for the different entity types
 ENTITY_TYPES = ['major_order', 'global_event', 'dispatch']
 

@@ -105,13 +105,19 @@ async def check_global_event(war_status):
 		with open(FILE_NAMES['global_event'], 'w') as outfile:
 			outfile.write(json.dumps(global_constants.LATEST_GLOBAL_EVENT_IDS))
 
-		message = f"**{event_details['title']}**"
+		message = event_details['title']
+		if '**' not in message:  # bold the title only if does not already contain bold tags
+			message = f"**{message}**"
 
 		# check if message field is empty
 		if event_details['message']:
 			message += f"\n\n{event_details['message']}"
 
-		await send_formed_message(message, 'global_event_new')
+		# check if current event message is exactly the same as the previous one, and ignore it if so
+		# this is because free stratagem events tend to come in pairs for some reason
+		if message != global_constants.LATEST_EVENT_STRING:
+			global_constants.LATEST_EVENT_STRING = message
+			await send_formed_message(message, 'global_event_new')
 
 
 # outputs new dispatches
