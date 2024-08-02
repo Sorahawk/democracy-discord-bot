@@ -35,8 +35,10 @@ async def check_major_order(order_details):
 		task_description = ''
 		if 'taskDescription' in order_details['setting']:
 			task_description = order_details['setting']['taskDescription']
+			if task_description:  # in case the description is empty, do not add the extra lines
+				task_description += '\n\n'
 
-		message = f"\n{brief}\n\n{task_description}\n\n".replace('\n', '\n> ')
+		message = f"\n{brief}\n\n{task_description}".replace('\n', '\n> ')
 		message = convert_tags_to_bold(message)
 		message += f"Order Expiry: {discord_timestamp}"  # append timestamp only after checking for HTML tags
 
