@@ -74,7 +74,11 @@ FILE_FOLDER_NAME = 'data-files/'
 for key, value in FILE_NAMES.items():
 	FILE_NAMES[key] = FILE_FOLDER_NAME + value
 
-parent_directory = '../'
+# automatically prepend home directory to file paths if on Linux
+if platform == 'linux':
+	parent_directory = '/home/ubuntu/democracy-bot/'
+else:
+	parent_directory = '../'
 for key, value in FILE_NAMES.items():
 	FILE_NAMES[key] = parent_directory + value
 
