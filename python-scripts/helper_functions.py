@@ -14,6 +14,15 @@ def convert_tags_to_bold(message):
 	return re.sub(r'<\S*?>', '**', message)
 
 
+# resets major order global variables
+def reset_major_order_var():
+	open(FILE_NAMES['major_order'], 'w').close()
+	global_constants.MAJOR_ORDER_ID = None
+	global_constants.MAJOR_ORDER_ACHIEVED = True
+	global_constants.MAJOR_ORDER_PAYLOAD = None
+	global_constants.MAJOR_ORDER_MESSAGE = None
+
+
 # sends message following the standard format of header - indented message - footer
 async def send_formed_message(message, header_voiceline_key):
 	message = f"\n{message}".replace('\n', '\n> ')

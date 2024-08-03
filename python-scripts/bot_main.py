@@ -28,6 +28,9 @@ async def task_check_major_order():
 		await error_recovery('major_order')
 
 	except:
+		# reset global variables in case of any errors, e.g. Discord message was deleted thus cannot be edited, throwing an error
+		reset_major_order_var()
+
 		error = traceback.format_exc()
 		if await error_handler(error, 'major_order', order_details):
 			check_major_order.stop()

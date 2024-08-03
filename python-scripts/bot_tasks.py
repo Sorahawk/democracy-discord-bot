@@ -83,11 +83,7 @@ async def check_major_order(order_details):
 		outfile.write(f"{json.dumps(global_constants.MAJOR_ORDER_PAYLOAD)}\n\n")
 
 	# reset global variables
-	open(FILE_NAMES['major_order'], 'w').close()
-	global_constants.MAJOR_ORDER_ID = None
-	global_constants.MAJOR_ORDER_ACHIEVED = True
-	global_constants.MAJOR_ORDER_PAYLOAD = None
-	global_constants.MAJOR_ORDER_MESSAGE = None
+	reset_major_order_var()
 
 
 # outputs new global events
