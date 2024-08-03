@@ -1,90 +1,142 @@
-{
-    "eventId": 1499101,
-    "id32": 0,
-    "portraitId32": 0,
-    "title": "BRIEFING",
-    "titleId32": 2908633975,
-    "message": "The Automatons have been a thorn in the side of Freedom long enough. Though the Ministry of Intelligence has not yet discovered where they came from, or what they want, we can wait no longer.\n\nThere is only one sure way to defend our citizens from the bots: total eradication.",
-    "messageId32": 2088099190,
-    "race": 1,
-    "flag": 1,
-    "assignmentId32": 460923291,
-    "effectIds":
-    [],
-    "planetIndices":
-    []
-},
-{
-    "eventId": 1499102,
-    "id32": 0,
-    "portraitId32": 0,
-    "title": "EMERGENCY",
-    "titleId32": 1200874512,
-    "message": "<i=3>HIGH PRIORITY BROADCAST. ALL UNITS TO LIBCON 1.\n\nFEDERATION UNDER ATTACK. MULTIPLE PLANETS HAVE FALLEN.</i>\n\nA massive Automaton Invasion Fleet, comprising tens of thousands of warships, arrived from FTL jump to the <i=1>Valdis Sector</i> and overran nearly every planet in just hours. Attacks on communications networks delayed warning until now. SEAF reserves are scrambling. All Helldivers are called to deploy immediately to the defense.\n\nThis Fleet dwarfs the Automaton armies destroyed in <i=1>Operation Swift Disassembly.</i> As we predicted from the start, they were merely a vanguard. This is the Automatons' true force. Where the Automatons hid this fleet, and what their true intentions are—those questions must be answered later.\n\nThe Reclamation has begun.",
-    "messageId32": 1128419935,
-    "race": 1,
-    "flag": 1,
-    "assignmentId32": 2358880216,
-    "effectIds":
-    [],
-    "planetIndices":
-    []
-},
-{
-    "eventId": 1499103,
-    "id32": 0,
-    "portraitId32": 0,
-    "title": "WEAPONS EXPERIMENTATION",
-    "titleId32": 3293632592,
-    "message": "",
-    "messageId32": 0,
-    "race": 0,
-    "flag": 0,
-    "assignmentId32": 0,
-    "effectIds":
-    [
-        1163
-    ],
-    "planetIndices":
-    []
-},
-{
-    "eventId": 1499104,
-    "id32": 0,
-    "portraitId32": 0,
-    "title": "<i=1>CHEMICAL FACTORY LIBERATED</i>\n \nThe <i=1>RL-77 AIRBURST ROCKET LAUNCHER</i> stratagem is temporarily available to all Helldivers fighting on <i=1>Penta.</i>",
-    "titleId32": 2003928816,
-    "message": "",
-    "messageId32": 0,
-    "race": 0,
-    "flag": 0,
-    "assignmentId32": 0,
-    "effectIds":
-    [
-        1170
-    ],
-    "planetIndices":
-    [
-        115
-    ]
-},
-{
-    "eventId": 1499105,
-    "id32": 0,
-    "portraitId32": 0,
-    "title": "<i=3>EXPLOSIVES CACHE LIBERATED</i>\n \nThe <i=1>MD-17 ANTI-TANK MINES</i> stratagem is temporarily available to all Helldivers fighting on <i=1>Choohe.</i>",
-    "titleId32": 853089915,
-    "message": "",
-    "messageId32": 0,
-    "race": 0,
-    "flag": 0,
-    "assignmentId32": 0,
-    "effectIds":
-    [
-        1171
-    ],
-    "planetIndices":
-    [
-        159
-    ]
-},
+[
+    {
+        "eventId": 1499101,
+        "id32": 0,
+        "portraitId32": 0,
+        "title": "BRIEFING",
+        "titleId32": 2908633975,
+        "message": "The Automatons have been a thorn in the side of Freedom long enough. Though the Ministry of Intelligence has not yet discovered where they came from, or what they want, we can wait no longer.\n\nThere is only one sure way to defend our citizens from the bots: total eradication.",
+        "messageId32": 2088099190,
+        "race": 1,
+        "flag": 1,
+        "assignmentId32": 460923291,
+        "effectIds":
+        [],
+        "planetIndices":
+        []
+    },
+    {
+        "eventId": 1499102,
+        "id32": 0,
+        "portraitId32": 0,
+        "title": "EMERGENCY",
+        "titleId32": 1200874512,
+        "message": "<i=3>HIGH PRIORITY BROADCAST. ALL UNITS TO LIBCON 1.\n\nFEDERATION UNDER ATTACK. MULTIPLE PLANETS HAVE FALLEN.</i>\n\nA massive Automaton Invasion Fleet, comprising tens of thousands of warships, arrived from FTL jump to the <i=1>Valdis Sector</i> and overran nearly every planet in just hours. Attacks on communications networks delayed warning until now. SEAF reserves are scrambling. All Helldivers are called to deploy immediately to the defense.\n\nThis Fleet dwarfs the Automaton armies destroyed in <i=1>Operation Swift Disassembly.</i> As we predicted from the start, they were merely a vanguard. This is the Automatons' true force. Where the Automatons hid this fleet, and what their true intentions are—those questions must be answered later.\n\nThe Reclamation has begun.",
+        "messageId32": 1128419935,
+        "race": 1,
+        "flag": 1,
+        "assignmentId32": 2358880216,
+        "effectIds":
+        [],
+        "planetIndices":
+        []
+    },
+    {
+        "eventId": 1499103,
+        "id32": 0,
+        "portraitId32": 0,
+        "title": "WEAPONS EXPERIMENTATION",
+        "titleId32": 3293632592,
+        "message": "",
+        "messageId32": 0,
+        "race": 0,
+        "flag": 0,
+        "assignmentId32": 0,
+        "effectIds":
+        [
+            1163
+        ],
+        "planetIndices":
+        []
+    },
+    {
+        "eventId": 1499104,
+        "id32": 0,
+        "portraitId32": 0,
+        "title": "<i=1>CHEMICAL FACTORY LIBERATED</i>\n \nThe <i=1>RL-77 AIRBURST ROCKET LAUNCHER</i> stratagem is temporarily available to all Helldivers fighting on <i=1>Penta.</i>",
+        "titleId32": 2003928816,
+        "message": "",
+        "messageId32": 0,
+        "race": 0,
+        "flag": 0,
+        "assignmentId32": 0,
+        "effectIds":
+        [
+            1170
+        ],
+        "planetIndices":
+        [
+            115
+        ]
+    },
+    {
+        "eventId": 1499105,
+        "id32": 0,
+        "portraitId32": 0,
+        "title": "<i=3>EXPLOSIVES CACHE LIBERATED</i>\n \nThe <i=1>MD-17 ANTI-TANK MINES</i> stratagem is temporarily available to all Helldivers fighting on <i=1>Choohe.</i>",
+        "titleId32": 853089915,
+        "message": "",
+        "messageId32": 0,
+        "race": 0,
+        "flag": 0,
+        "assignmentId32": 0,
+        "effectIds":
+        [
+            1171
+        ],
+        "planetIndices":
+        [
+            159
+        ]
+    },
+    {
+        "eventId": 1499196,
+        "id32": 0,
+        "portraitId32": 0,
+        "title": "FAILED",
+        "titleId32": 506754096,
+        "message": "The valiant sacrifice of millions of our most well-trained and brave heroes was not enough to pry free the collectivist death-grip on our stolen worlds. \n\nThe Automatons have now deployed <i=1>Orbital Cannons</i> across their entire domain—another metallic thorn in the side of Liberty. The pilot shortages have been replenished, and additional training will limit further impacts to extraction times. Even so, Helldiver missions to destroy these cannons will remain critical to the war effort in perpetuity.",
+        "messageId32": 3304306353,
+        "race": 1,
+        "flag": 3,
+        "assignmentId32": 0,
+        "effectIds":
+        [],
+        "planetIndices":
+        []
+    },
+    {
+        "eventId": 1499197,
+        "id32": 0,
+        "portraitId32": 0,
+        "title": "BRIEFING",
+        "titleId32": 2908633975,
+        "message": "High Command has ordered an Efficacy Review of the currently available <i=1>Mine Stratagems</i>.\n\nTo enable this review, the Helldivers are ordered to kill or dismantle the targeted number of Liberty's enemies. If the targeted number is not reached, High Command will specially authorize the urgent addition of <i=1>Anti-Tank Mines</i> to the Helldivers' repetoire.\n\nIf the targeted number of enemies are eliminated, then the currently available <i=1>Mine Stratagems</i> will be deemed sufficient, and no additions will be authorized at this time.",
+        "messageId32": 2981930617,
+        "race": 1,
+        "flag": 1,
+        "assignmentId32": 566646649,
+        "effectIds":
+        [],
+        "planetIndices":
+        []
+    },
+    {
+        "eventId": 1499198,
+        "id32": 0,
+        "portraitId32": 0,
+        "title": "OPEN LICENSE - INCENDIARY MINES",
+        "titleId32": 1157675916,
+        "message": "",
+        "messageId32": 0,
+        "race": 0,
+        "flag": 0,
+        "assignmentId32": 0,
+        "effectIds":
+        [
+            1184
+        ],
+        "planetIndices":
+        []
+    }
+]
