@@ -24,10 +24,13 @@ BOT_COMMAND_PREFIX = '.'
 BOT_COMMAND_LIST = []
 
 # base URL for the API
-BASE_API_URL = 'https://helldiverstrainingmanual.com/api/v1/war'
+BASE_API_URL = 'https://api.live.prod.thehelldiversgame.com/api'
 
 # standard headers for HTTP requests
 STANDARD_HEADERS = {'Accept-Language': 'en-US'}
+
+# ID of the current War Season
+WAR_ID = 801
 
 # timestamp of latest dispatch sent
 LATEST_DISPATCH_TIMESTAMP = 0
