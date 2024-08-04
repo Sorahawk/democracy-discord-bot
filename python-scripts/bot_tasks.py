@@ -104,6 +104,12 @@ async def check_global_event(war_status):
 			outfile.write(json.dumps(global_constants.LATEST_GLOBAL_EVENT_IDS))
 
 		message = event_details['title']
+
+		# add on MO prefix to subheader for MO events
+		# flag 1 is briefing, 2 is success and 3 is failed
+		if event_details['flag'] in [1, 2, 3]:
+			message = f"MAJOR ORDER {message}"
+
 		if '**' not in message:  # bold the title only if does not already contain bold tags
 			message = f"**{message}**"
 
