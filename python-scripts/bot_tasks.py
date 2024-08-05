@@ -47,7 +47,12 @@ async def check_major_order(order_details):
 
 		# if major order message was sent before, edit message with the updated expiry time
 		if order_id == global_constants.MAJOR_ORDER_ID and global_constants.MAJOR_ORDER_MESSAGE:
-			await global_constants.MAJOR_ORDER_MESSAGE.edit(content=major_order_string)
+			try:
+				await global_constants.MAJOR_ORDER_MESSAGE.edit(content=major_order_string)
+			except:
+				# reset global variables if Discord message cannot be located
+				reset_major_order_var()
+				exit(1)
 
 		else:  # otherwise, output new major order
 			sent_message = await global_constants.MAIN_CHANNEL.send(major_order_string)

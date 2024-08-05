@@ -1,4 +1,4 @@
-import global_constants, json, traceback
+import global_constants, json
 
 from secrets import *
 from bot_tasks import *
@@ -27,11 +27,7 @@ async def task_check_major_order():
 		await check_major_order(order_details)
 		await error_recovery('major_order')
 
-	except:
-		# reset global variables in case of any errors, e.g. Discord message was deleted thus cannot be edited, throwing an error
-		reset_major_order_var()
-
-		error = traceback.format_exc()
+	except Exception as error:
 		if await error_handler(error, 'major_order', order_details):
 			check_major_order.stop()
 
@@ -46,8 +42,7 @@ async def task_check_global_event():
 		await check_global_event(war_status)
 		await error_recovery('global_event')
 
-	except:
-		error = traceback.format_exc()
+	except Exception as error:
 		if await error_handler(error, 'global_event', war_status):
 			check_global_event.stop()
 
@@ -62,8 +57,7 @@ async def task_check_dispatch():
 		await check_dispatch(dispatches)
 		await error_recovery('dispatch')
 
-	except:
-		error = traceback.format_exc()
+	except Exception as error:
 		if await error_handler(error, 'dispatch', dispatches):
 			check_dispatch.stop()
 
