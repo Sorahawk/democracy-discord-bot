@@ -52,7 +52,7 @@ async def check_major_order(order_details):
 			except:
 				# reset global variables if Discord message cannot be located
 				reset_major_order_var()
-				exit(1)
+				raise Exception('Discord message for current Major Order cannot be found.')
 
 		else:  # otherwise, output new major order
 			sent_message = await global_constants.MAIN_CHANNEL.send(major_order_string)
