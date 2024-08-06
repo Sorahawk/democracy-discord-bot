@@ -33,7 +33,7 @@ async def check_major_order(order_details):
 			brief = order_details['setting']['overrideBrief']
 
 		task_description = ''
-		if 'taskDescription' in order_details['setting']:
+		if 'taskDescription' in order_details['setting'] and order_details['setting']['taskDescription'] != order_details['setting']['overrideBrief']:
 			task_description = order_details['setting']['taskDescription']
 			if task_description:  # in case the description is empty, do not add the extra lines
 				task_description += '\n\n'
@@ -108,19 +108,24 @@ async def check_global_event(war_status):
 		with open(FILE_NAMES['global_event'], 'w') as outfile:
 			outfile.write(json.dumps(global_constants.LATEST_GLOBAL_EVENT_IDS))
 
-		message = event_details['title']
+		message = ''
+		if 'title' in event_details:
+			message = event_details['title']
 
-		# add on MO prefix to subheader for MO events
-		# flag 1 is briefing, 2 is success and 3 is failed
-		if event_details['flag'] in [1, 2, 3]:
-			message = f"MAJOR ORDER {message}"
+			# add on MO prefix to subheader for MO events
+			# flag 1 is briefing, 2 is success and 3 is failed
+			if event_details['flag'] in [1, 2, 3]:
+				message = f"MAJOR ORDER {message}"
 
-		if '**' not in message:  # bold the title only if does not already contain bold tags
-			message = f"**{message}**"
+			if '**' not in message:  # bold the title only if does not already contain bold tags
+				message = f"**{message}**"
 
 		# check if message field is empty
 		if event_details['message']:
 			message += f"\n\n{event_details['message']}"
+
+		if not message.strip():
+			continue
 
 		# check if current event message is exactly the same as the previous one, and ignore it if so
 		# this is because free stratagem events tend to come in pairs for some reason
