@@ -140,12 +140,12 @@ async def check_dispatch(dispatches):
 		return
 
 	for dispatch in dispatches:
+		timestamp = dispatch['published']
+
 		if 'message' not in dispatch or not dispatch['message']:
 			continue
 
-		timestamp = dispatch['published']
 		message = dispatch['message']
-
 		await send_formed_message(message, 'dispatch_new')
 
 	global_constants.LATEST_DISPATCH_TIMESTAMP = str(timestamp + 1)
