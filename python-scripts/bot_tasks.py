@@ -16,7 +16,7 @@ async def check_major_order(order_details):
 		order_progress = order_details['progress']
 		global_constants.MAJOR_ORDER_ACHIEVED = True
 		for subobjective in order_progress:
-			if subobjective != 1:
+			if subobjective == 0:
 				global_constants.MAJOR_ORDER_ACHIEVED = False
 				break
 

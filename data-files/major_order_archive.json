@@ -1150,5 +1150,145 @@
             },
             "flags": 0
         }
+    },
+    {
+        "id32": 1087862562,
+        "progress":
+        [
+            5000000,
+            750000000,
+            1,
+            1,
+            1
+        ],
+        "expiresIn": 37,
+        "setting":
+        {
+            "type": 4,
+            "overrideTitle": "MAJOR ORDER",
+            "overrideBrief": "Eradicate as many Terminids as possible, with a focus on Bile Titans, in the hope of somehow arresting the spread of the Gloom.",
+            "taskDescription": "Eradicate as many Terminids as possible, with a focus on Bile Titans, in the hope of somehow arresting the spread of the Gloom.",
+            "tasks":
+            [
+                {
+                    "type": 3,
+                    "values":
+                    [
+                        2,
+                        1,
+                        5000000,
+                        2514244534,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "valueTypes":
+                    [
+                        1,
+                        2,
+                        3,
+                        4,
+                        6,
+                        5,
+                        8,
+                        9,
+                        11,
+                        12
+                    ]
+                },
+                {
+                    "type": 3,
+                    "values":
+                    [
+                        2,
+                        1,
+                        750000000,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "valueTypes":
+                    [
+                        1,
+                        2,
+                        3,
+                        4,
+                        6,
+                        5,
+                        8,
+                        9,
+                        11,
+                        12
+                    ]
+                },
+                {
+                    "type": 13,
+                    "values":
+                    [
+                        1,
+                        1,
+                        75
+                    ],
+                    "valueTypes":
+                    [
+                        3,
+                        11,
+                        12
+                    ]
+                },
+                {
+                    "type": 13,
+                    "values":
+                    [
+                        1,
+                        1,
+                        169
+                    ],
+                    "valueTypes":
+                    [
+                        3,
+                        11,
+                        12
+                    ]
+                },
+                {
+                    "type": 13,
+                    "values":
+                    [
+                        1,
+                        1,
+                        214
+                    ],
+                    "valueTypes":
+                    [
+                        3,
+                        11,
+                        12
+                    ]
+                }
+            ],
+            "rewards":
+            [
+                {
+                    "type": 1,
+                    "id32": 897894480,
+                    "amount": 65
+                }
+            ],
+            "reward":
+            {
+                "type": 1,
+                "id32": 897894480,
+                "amount": 65
+            },
+            "flags": 1
+        }
     }
 ]
