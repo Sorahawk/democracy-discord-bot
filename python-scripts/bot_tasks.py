@@ -121,7 +121,7 @@ async def check_global_event(war_status):
 				message = f"**{message}**"
 
 		# check if message field is empty
-		if event_details['message']:
+		if 'message' in event_details and event_details['message']:
 			message += f"\n\n{event_details['message']}"
 
 		if not message.strip():
