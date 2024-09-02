@@ -12,14 +12,6 @@ async def check_major_order(order_details):
 		order_details = order_details[0]
 		order_id = str(order_details['id32'])
 
-		# update major order progress
-		order_progress = order_details['progress']
-		global_constants.MAJOR_ORDER_ACHIEVED = True
-		for subobjective in order_progress:
-			if subobjective == 0:
-				global_constants.MAJOR_ORDER_ACHIEVED = False
-				break
-
 		# update major order payload
 		global_constants.MAJOR_ORDER_PAYLOAD = order_details
 
@@ -65,30 +57,13 @@ async def check_major_order(order_details):
 				outfile.write(f"{order_id}, {sent_message.id}")
 		return
 
-	# if not order_details (no major order active), then code below executes
-	if not global_constants.MAJOR_ORDER_ID:
-		return
+	if global_constants.MAJOR_ORDER_ID:
+		# archive payload
+		with open(FILE_NAMES['major_order_archive'], 'a') as outfile:
+			outfile.write(f"{json.dumps(global_constants.MAJOR_ORDER_PAYLOAD)}\n\n")
 
-	# major order just expired; print results
-	order_expiry = global_constants.MAJOR_ORDER_PAYLOAD['expiresIn']
-
-	if order_expiry < 60 and not global_constants.MAJOR_ORDER_ACHIEVED:
-		result = 'FAILURE'
-	else:
-		result = 'SUCCESS'
-
-	description = global_constants.MAJOR_ORDER_PAYLOAD['setting']['taskDescription']
-	result = f"Status: **{result}**"
-
-	header = f"{STANDARD_VOICELINES['major_order_end']}\n"
-	await global_constants.MAIN_CHANNEL.send(f"{header}\n{description}\n\n{result}\n\n{MESSAGE_FOOTER}")
-
-	# archive payload
-	with open(FILE_NAMES['major_order_archive'], 'a') as outfile:
-		outfile.write(f"{json.dumps(global_constants.MAJOR_ORDER_PAYLOAD)}\n\n")
-
-	# reset global variables
-	reset_major_order_var()
+		# reset global variables
+		reset_major_order_var()
 
 
 # outputs new global events

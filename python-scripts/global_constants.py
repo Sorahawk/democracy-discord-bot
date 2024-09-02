@@ -41,9 +41,6 @@ LATEST_GLOBAL_EVENT_IDS = []
 # ID of latest major order
 MAJOR_ORDER_ID = None
 
-# boolean to track if latest major order objective has been achieved
-MAJOR_ORDER_ACHIEVED = True
-
 # entire JSON payload of latest major order
 MAJOR_ORDER_PAYLOAD = None
 
@@ -95,7 +92,6 @@ MESSAGE_FOOTER = '*----------END OF TRANSMISSION----------*'
 # dictionary of messages used by the bot
 STANDARD_VOICELINES = {
 	'major_order_new': 'NEW MAJOR ORDER RECEIVED',
-	'major_order_end': 'MAJOR ORDER CONCLUDED',
 	'global_event_new': 'NEW EVENT DETECTED',
 	'dispatch_new': 'DISPATCH RECEIVED',
 }
