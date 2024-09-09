@@ -85,7 +85,7 @@ async def check_global_event(war_status):
 
 		message = ''
 		if 'title' in event_details:
-			message = event_details['title']
+			message = convert_tags_to_bold(event_details['title'])
 
 			# add on MO prefix to subheader for MO events
 			# flag 1 is briefing, 2 is success and 3 is failed
