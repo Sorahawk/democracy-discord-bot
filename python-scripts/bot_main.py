@@ -29,7 +29,7 @@ async def task_check_major_order():
 
 	except Exception as error:
 		if await error_handler(error, 'major_order', order_details):
-			check_major_order.stop()
+			task_check_major_order.stop()
 
 
 @loop(minutes=1)
@@ -44,7 +44,7 @@ async def task_check_global_event():
 
 	except Exception as error:
 		if await error_handler(error, 'global_event', war_status):
-			check_global_event.stop()
+			task_check_global_event.stop()
 
 
 @loop(minutes=1)
@@ -59,7 +59,7 @@ async def task_check_dispatch():
 
 	except Exception as error:
 		if await error_handler(error, 'dispatch', dispatches):
-			check_dispatch.stop()
+			task_check_dispatch.stop()
 
 
 @bot.event
