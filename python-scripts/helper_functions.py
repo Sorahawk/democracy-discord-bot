@@ -34,7 +34,12 @@ async def send_formed_message(message, header_voiceline_key):
 
 # standard task error handler
 async def error_handler(traceback_error, entity_type, payload):
-	await global_constants.MAIN_CHANNEL.send(f"Unexpected error in `check_{entity_type}()`: {traceback_error}")
+	error_string = f"Unexpected error in `check_{entity_type}()`: {traceback_error}"
+
+	if "RemoteDisconnected" in error_string:  # ignore sporadic connection issues
+		return False
+
+	await global_constants.MAIN_CHANNEL.send(error_string)
 	await global_constants.MAIN_CHANNEL.send(f"Payload: ```{payload}```")
 
 	# stop task from re-execution after one retry
