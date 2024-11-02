@@ -68,7 +68,7 @@ async def check_major_order(order_details):
 
 # outputs new global events
 async def check_global_event(war_status):
-	if not war_status['globalEvents']:
+	if not war_status or not war_status['globalEvents']:
 		return
 
 	for event_details in war_status['globalEvents']:
