@@ -18,7 +18,6 @@ def convert_tags_to_bold(message):
 def reset_major_order_var():
 	open(FILE_NAMES['major_order'], 'w').close()
 	global_constants.MAJOR_ORDER_ID = None
-	global_constants.MAJOR_ORDER_ACHIEVED = True
 	global_constants.MAJOR_ORDER_PAYLOAD = None
 	global_constants.MAJOR_ORDER_MESSAGE = None
 
@@ -37,6 +36,8 @@ async def error_handler(traceback_error, entity_type, payload):
 	error_string = f"Unexpected error in `check_{entity_type}()`: {traceback_error}"
 
 	if "RemoteDisconnected" in error_string:  # ignore sporadic connection issues
+		return False
+	elif "Expecting value: line 1 column 1 (char 0)" in error_string:  # ignore JSONDecodeError
 		return False
 
 	await global_constants.MAIN_CHANNEL.send(error_string)

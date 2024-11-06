@@ -6,14 +6,11 @@ from helper_functions import *
 from discord.ext.tasks import loop
 
 
-# outputs new major orders, updates expiry time of existing major orders, and sends results of expired major orders
+# outputs new major orders and updates expiry time of existing major orders
 async def check_major_order(order_details):
 	if order_details:
 		order_details = order_details[0]
 		order_id = str(order_details['id32'])
-
-		# update major order payload
-		global_constants.MAJOR_ORDER_PAYLOAD = order_details
 
 		# form major order string
 		expiry_timestamp = int(time.time()) + order_details['expiresIn']
@@ -52,18 +49,11 @@ async def check_major_order(order_details):
 			# update variables
 			global_constants.MAJOR_ORDER_ID = order_id
 			global_constants.MAJOR_ORDER_MESSAGE = sent_message
+			global_constants.MAJOR_ORDER_PAYLOAD = order_details
 
 			with open(FILE_NAMES['major_order'], 'w') as outfile:
 				outfile.write(f"{order_id}, {sent_message.id}")
 		return
-
-	if global_constants.MAJOR_ORDER_ID:
-		# archive payload
-		with open(FILE_NAMES['major_order_archive'], 'a') as outfile:
-			outfile.write(f"{json.dumps(global_constants.MAJOR_ORDER_PAYLOAD)}\n\n")
-
-		# reset global variables
-		reset_major_order_var()
 
 
 # outputs new global events
