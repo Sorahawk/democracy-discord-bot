@@ -85,7 +85,7 @@ async def check_global_event(war_status):
 			if '**' not in message:  # bold the title only if does not already contain bold tags
 				message = f"**{message}**"
 
-		# check if message field is empty
+		# append message contents if not empty
 		if 'message' in event_details and event_details['message']:
 			message += f"\n\n{event_details['message']}"
 
@@ -106,12 +106,9 @@ async def check_dispatch(dispatches):
 
 	for dispatch in dispatches:
 		timestamp = dispatch['published']
-
-		if 'message' not in dispatch or not dispatch['message']:
-			continue
-
-		message = dispatch['message']
-		await send_formed_message(message, 'dispatch_new')
+		message = dispatch.get('message')
+		if message:
+			await send_formed_message(message, 'dispatch_new')
 
 	global_constants.LATEST_DISPATCH_TIMESTAMP = str(timestamp + 1)
 	with open(FILE_NAMES['dispatch'], 'w') as outfile:
