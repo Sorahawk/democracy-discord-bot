@@ -106,6 +106,8 @@ async def on_ready():
 	task_check_major_order.start()
 
 	# set activity status
+	# available ActivityTypes: 0 is gaming (Playing), 1 is streaming (Streaming), 2 is listening (Listening to),
+	# 3 is watching (Watching), 4 is custom, 5 is competing (Competing in)
 	activity_status = Activity(type=3, name='the Galactic War unfold')
 	await global_constants.BOT_INSTANCE.change_presence(activity=activity_status)
 
