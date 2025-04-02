@@ -9,5 +9,4 @@ import time
 import discord
 import requests
 
-from datetime import datetime
 from discord.ext.tasks import loop
