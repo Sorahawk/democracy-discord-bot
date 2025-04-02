@@ -1,20 +1,13 @@
-import global_constants, json
-
-from secrets import *
-from bot_tasks import *
-from global_constants import *
-from helper_functions import *
-
-from discord import Activity, Client, Intents
+from func_all import *
 
 
 # declare bot intents
 # all() enables everything, including the privileged intents: presences, members and message_content
-intents = Intents.all()
+intents = discord.Intents.all()
 
 # initialise client
-bot = Client(intents=intents)
-global_constants.BOT_INSTANCE = bot
+bot = discord.Client(intents=intents)
+var_global.BOT_INSTANCE = bot
 
 
 @loop(minutes=1)
@@ -49,7 +42,7 @@ async def task_check_global_event():
 
 @loop(minutes=1)
 async def task_check_dispatch():
-	endpoint = f"{BASE_API_URL}/NewsFeed/{WAR_ID}?fromTimeStamp={global_constants.LATEST_DISPATCH_TIMESTAMP}"
+	endpoint = f"{BASE_API_URL}/NewsFeed/{WAR_ID}?fromTimeStamp={var_global.LATEST_DISPATCH_TIMESTAMP}"
 
 	dispatches = 'NO RESPONSE'
 	try:
@@ -66,13 +59,13 @@ async def task_check_dispatch():
 async def on_ready():
 	# on_ready() may be called more than once, typically whenever the bot momentarily loses connection to Discord 
 	# check if this is first time bot is calling on_ready()
-	if global_constants.MAIN_CHANNEL:
+	if var_global.MAIN_CHANNEL:
 		return
 
 	print(f"{bot.user} is online.\n")
 
 	# initialise global main channel object
-	global_constants.MAIN_CHANNEL = bot.get_channel(MAIN_CHANNEL_ID)
+	var_global.MAIN_CHANNEL = bot.get_channel(MAIN_CHANNEL_ID)
 
 	# initialise empty files if they do not already exist
 	for entity_type in ENTITY_TYPES:
@@ -81,24 +74,24 @@ async def on_ready():
 	# read in variables from files
 	with open(FILE_NAMES['major_order']) as infile:
 		data = infile.readline().strip().split(',')
-		global_constants.MAJOR_ORDER_ID = data[0]
+		var_global.MAJOR_ORDER_ID = data[0]
 
 		# attempt to retrieve major order message, and if it cannot be retrieved, wipe the major order ID so that the bot will output another message
 		try:
-			global_constants.MAJOR_ORDER_MESSAGE = await global_constants.MAIN_CHANNEL.fetch_message(data[-1])
+			var_global.MAJOR_ORDER_MESSAGE = await var_global.MAIN_CHANNEL.fetch_message(data[-1])
 		except:
-			global_constants.MAJOR_ORDER_ID = None
+			var_global.MAJOR_ORDER_ID = None
 
 	with open(FILE_NAMES['global_event']) as infile:
 		data = infile.readline().strip()
 		if data:
-			global_constants.LATEST_GLOBAL_EVENT_IDS = json.loads(data)
+			var_global.LATEST_GLOBAL_EVENT_IDS = json.loads(data)
 
 	with open(FILE_NAMES['dispatch']) as infile:
 		data = infile.readline().strip()
 		if not data:
 			data = '0'
-		global_constants.LATEST_DISPATCH_TIMESTAMP = data
+		var_global.LATEST_DISPATCH_TIMESTAMP = data
 
 	# start tasks
 	task_check_dispatch.start()
@@ -108,8 +101,8 @@ async def on_ready():
 	# set activity status
 	# available ActivityTypes: 0 is gaming (Playing), 1 is streaming (Streaming), 2 is listening (Listening to),
 	# 3 is watching (Watching), 4 is custom, 5 is competing (Competing in)
-	activity_status = Activity(type=3, name='the Galactic War unfold')
-	await global_constants.BOT_INSTANCE.change_presence(activity=activity_status)
+	activity_status = discord.Activity(type=3, name='the Galactic War unfold')
+	await var_global.BOT_INSTANCE.change_presence(activity=activity_status)
 
 
 # start bot

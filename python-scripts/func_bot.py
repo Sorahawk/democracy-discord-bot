@@ -1,9 +1,4 @@
-import global_constants, json, requests, time
-
-from global_constants import *
-from helper_functions import *
-
-from discord.ext.tasks import loop
+from func_helper import *
 
 
 # outputs new major orders and updates expiry time of existing major orders
@@ -35,21 +30,21 @@ async def check_major_order(order_details):
 		major_order_string = f"{header}\n{message}\n\n{MESSAGE_FOOTER}"
 
 		# if major order message was sent before, edit message with the updated expiry time
-		if order_id == global_constants.MAJOR_ORDER_ID and global_constants.MAJOR_ORDER_MESSAGE:
+		if order_id == var_global.MAJOR_ORDER_ID and var_global.MAJOR_ORDER_MESSAGE:
 			try:
-				await global_constants.MAJOR_ORDER_MESSAGE.edit(content=major_order_string)
+				await var_global.MAJOR_ORDER_MESSAGE.edit(content=major_order_string)
 			except:
 				# reset global variables if Discord message cannot be located
 				reset_major_order_var()
 				raise Exception('Discord message for current Major Order cannot be found.')
 
 		else:  # otherwise, output new major order
-			sent_message = await global_constants.MAIN_CHANNEL.send(major_order_string)
+			sent_message = await var_global.MAIN_CHANNEL.send(major_order_string)
 
 			# update variables
-			global_constants.MAJOR_ORDER_ID = order_id
-			global_constants.MAJOR_ORDER_MESSAGE = sent_message
-			global_constants.MAJOR_ORDER_PAYLOAD = order_details
+			var_global.MAJOR_ORDER_ID = order_id
+			var_global.MAJOR_ORDER_MESSAGE = sent_message
+			var_global.MAJOR_ORDER_PAYLOAD = order_details
 
 			with open(FILE_NAMES['major_order'], 'w') as outfile:
 				outfile.write(f"{order_id}, {sent_message.id}")
@@ -65,13 +60,13 @@ async def check_global_event(war_status):
 		event_id = str(event_details['eventId'])
 
 		# ignore events that were already covered
-		if event_id in global_constants.LATEST_GLOBAL_EVENT_IDS:
+		if event_id in var_global.LATEST_GLOBAL_EVENT_IDS:
 			continue
 
-		global_constants.LATEST_GLOBAL_EVENT_IDS.append(event_id)
+		var_global.LATEST_GLOBAL_EVENT_IDS.append(event_id)
 
 		with open(FILE_NAMES['global_event'], 'w') as outfile:
-			outfile.write(json.dumps(global_constants.LATEST_GLOBAL_EVENT_IDS))
+			outfile.write(json.dumps(var_global.LATEST_GLOBAL_EVENT_IDS))
 
 		message = ''
 		if 'title' in event_details:
@@ -94,8 +89,8 @@ async def check_global_event(war_status):
 
 		# check if current event message is exactly the same as the previous one, and ignore it if so
 		# this is because free stratagem events tend to come in pairs for some reason
-		if message != global_constants.LATEST_EVENT_STRING:
-			global_constants.LATEST_EVENT_STRING = message
+		if message != var_global.LATEST_EVENT_STRING:
+			var_global.LATEST_EVENT_STRING = message
 			await send_formed_message(message, 'global_event_new')
 
 
@@ -110,6 +105,6 @@ async def check_dispatch(dispatches):
 		if message:
 			await send_formed_message(message, 'dispatch_new')
 
-	global_constants.LATEST_DISPATCH_TIMESTAMP = str(timestamp + 1)
+	var_global.LATEST_DISPATCH_TIMESTAMP = str(timestamp + 1)
 	with open(FILE_NAMES['dispatch'], 'w') as outfile:
 		outfile.write(str(timestamp + 1))
