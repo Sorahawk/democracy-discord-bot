@@ -57,6 +57,13 @@ async def task_check_dispatch():
 
 @bot.event
 async def on_ready():
+
+	# set activity status
+	# available ActivityTypes: 0 is gaming (Playing), 1 is streaming (Streaming), 2 is listening (Listening to),
+	# 3 is watching (Watching), 4 is custom, 5 is competing (Competing in)
+	activity_status = discord.Activity(type=3, name='the Galactic War unfold')
+	await var_global.BOT_INSTANCE.change_presence(activity=activity_status)
+
 	# on_ready() may be called more than once, typically whenever the bot momentarily loses connection to Discord 
 	# check if this is first time bot is calling on_ready()
 	if var_global.MAIN_CHANNEL:
@@ -97,12 +104,6 @@ async def on_ready():
 	task_check_dispatch.start()
 	task_check_global_event.start()
 	task_check_major_order.start()
-
-	# set activity status
-	# available ActivityTypes: 0 is gaming (Playing), 1 is streaming (Streaming), 2 is listening (Listening to),
-	# 3 is watching (Watching), 4 is custom, 5 is competing (Competing in)
-	activity_status = discord.Activity(type=3, name='the Galactic War unfold')
-	await var_global.BOT_INSTANCE.change_presence(activity=activity_status)
 
 
 # start bot
