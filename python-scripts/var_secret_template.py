@@ -6,4 +6,4 @@
 DEBUG_MODE = False
 
 # (string) Discord Bot Token
-DISCORD_BOT_TOKEN = None
+DISCORD_BOT_TOKEN = ''
