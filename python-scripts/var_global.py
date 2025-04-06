@@ -72,7 +72,6 @@ for entity_type in ENTITY_TYPES:
 # dictionary of names of storage files used
 FILE_NAMES = {
 	'major_order': 'current_major_order.txt',
-	'major_order_archive': 'major_order_archive.json',
 	'global_event': 'latest_global_event.json',
 	'dispatch': 'latest_dispatch.txt',
 }
