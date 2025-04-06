@@ -6,7 +6,9 @@ import os
 import re
 import json
 import time
+import random
 import discord
 import requests
+import subprocess
 
 from discord.ext.tasks import loop

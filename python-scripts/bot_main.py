@@ -55,15 +55,21 @@ async def task_check_dispatch():
 			task_check_dispatch.stop()
 
 
-@bot.event
-async def on_ready():
+# automatically rotate bot's Discord status every 10 minutes
+@loop(minutes=10)
+async def task_rotate_status():
+	activity, activity_type = random.choice(list(BOT_ACTIVITY_STATUSES.items()))
 
-	# set activity status
-	# available ActivityTypes: 0 is gaming (Playing), 1 is streaming (Streaming), 2 is listening (Listening to),
-	# 3 is watching (Watching), 4 is custom, 5 is competing (Competing in)
-	activity_status = discord.Activity(type=3, name='the Galactic War unfold')
+	if isinstance(activity_type, str):
+		activity_status = discord.Streaming(url=activity_type, name=activity)
+	else:
+		activity_status = discord.Activity(type=activity_type, name=activity)
+
 	await var_global.BOT_INSTANCE.change_presence(activity=activity_status)
 
+
+@bot.event
+async def on_ready():
 	# on_ready() may be called more than once, typically whenever the bot momentarily loses connection to Discord 
 	# check if this is first time bot is calling on_ready()
 	if var_global.MAIN_CHANNEL:
@@ -104,6 +110,29 @@ async def on_ready():
 	task_check_dispatch.start()
 	task_check_global_event.start()
 	task_check_major_order.start()
+	task_rotate_status.start()
+
+
+@bot.event
+async def on_message(message):
+	prefix_length = len(BOT_COMMAND_PREFIX)  # prefix might not always be single character
+
+	# ignore any messages if bot is not ready, messages sent from the bot itself and messages that don't start with the command prefix
+	if not bot.is_ready() or message.author == bot.user or message.content[:prefix_length] != BOT_COMMAND_PREFIX:
+		return
+
+	# process commands
+	contents = message.content[prefix_length:].lower().split()
+
+	# update command
+	if contents[0] in ['update'] and sys.platform == 'linux':
+		await message.channel.send('Receiving updates from the Ministry of Truth.')
+
+		# reset any changes that could have been made to the project folder and pull latest code
+		subprocess.run(f"cd {LINUX_ABSOLUTE_PATH} && git reset --hard HEAD && git pull", shell=True)
+
+		# restart service
+		subprocess.run(f"sudo systemctl restart {LINUX_SERVICE_NAME}", shell=True)
 
 
 # start bot

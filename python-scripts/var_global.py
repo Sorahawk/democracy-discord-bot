@@ -1,4 +1,14 @@
-from sys import platform
+import sys
+
+
+### LINUX ###
+
+# absolute path to the project folder on the Linux cloud instance
+# cannot use os.getcwd() because systemd service runs the script from root directory
+LINUX_ABSOLUTE_PATH = '/home/ubuntu/democracy-bot/python-scripts'
+
+# name of the bot service running on the Linux cloud instance
+LINUX_SERVICE_NAME = 'democracy-bot.service'
 
 
 ### DISCORD ###
@@ -75,7 +85,7 @@ for key, value in FILE_NAMES.items():
 	FILE_NAMES[key] = FILE_FOLDER_NAME + value
 
 # automatically prepend home directory to file paths if on Linux
-if platform == 'linux':
+if sys.platform == 'linux':
 	parent_directory = '/home/ubuntu/democracy-bot/'
 else:
 	parent_directory = '../'
@@ -97,3 +107,15 @@ STANDARD_VOICELINES = {
 }
 for key, value in STANDARD_VOICELINES.items():
 	STANDARD_VOICELINES[key] = f'**{ATTENTION_EMOJI}   {value}   {ATTENTION_EMOJI}**'
+
+
+# dictionary of the available Discord statuses for the bot
+# if activity (key) is meant to be a 'Streaming' activity, then corresponding value is a string URL
+# otherwise corresponding value is the respective ActivityType
+
+# available ActivityTypes: 0 is gaming (Playing), 1 is streaming (Streaming), 2 is listening (Listening to),
+# 3 is watching (Watching), 4 is custom, 5 is competing (Competing in)
+BOT_ACTIVITY_STATUSES = {
+	"updates from Strohmann News": 2,
+	"the Galactic War unfold": 3,
+}
