@@ -115,6 +115,6 @@ for key, value in STANDARD_VOICELINES.items():
 # available ActivityTypes: 0 is gaming (Playing), 1 is streaming (Streaming), 2 is listening (Listening to),
 # 3 is watching (Watching), 4 is custom, 5 is competing (Competing in)
 BOT_ACTIVITY_STATUSES = {
-	"updates from Strohmann News": 2,
+	"Strohmann News": 2,
 	"the Galactic War unfold": 3,
 }
