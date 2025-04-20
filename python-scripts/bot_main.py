@@ -129,7 +129,7 @@ async def on_message(message):
 		await message.channel.send('Receiving updates from the Ministry of Truth.')
 
 		# reset any changes that could have been made to the project folder and pull latest code
-		subprocess.run(f"cd {LINUX_ABSOLUTE_PATH} && git reset --hard HEAD && git pull", shell=True)
+		subprocess.run(f"cd {LINUX_ABSOLUTE_PATH} && git reset --hard HEAD && git clean -d -f && git pull", shell=True)
 
 		# restart service
 		subprocess.run(f"sudo systemctl restart {LINUX_SERVICE_NAME}", shell=True)
