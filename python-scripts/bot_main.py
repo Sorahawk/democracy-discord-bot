@@ -107,9 +107,9 @@ async def on_ready():
 		var_global.LATEST_DISPATCH_TIMESTAMP = data
 
 	# start tasks
-	task_check_dispatch.start()
+	#task_check_dispatch.start()
 	task_check_global_event.start()
-	task_check_major_order.start()
+	#task_check_major_order.start()
 	task_rotate_status.start()
 
 

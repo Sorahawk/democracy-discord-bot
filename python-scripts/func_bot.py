@@ -77,7 +77,7 @@ async def check_global_event(war_status):
 			if event_details['flag'] in [1, 2, 3]:
 				message = f"MAJOR ORDER {message}"
 
-			if '**' not in message:  # bold the title only if does not already contain bold tags
+			if message and '**' not in message:  # bold the title only if it has text but does not already contain bold tags
 				message = f"**{message}**"
 
 		# append message contents if not empty
