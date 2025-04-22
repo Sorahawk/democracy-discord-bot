@@ -107,11 +107,9 @@ STANDARD_VOICELINES = {
 for key, value in STANDARD_VOICELINES.items():
 	STANDARD_VOICELINES[key] = f'**{ATTENTION_EMOJI}   {value}   {ATTENTION_EMOJI}**'
 
-
 # dictionary of the available Discord statuses for the bot
 # if activity (key) is meant to be a 'Streaming' activity, then corresponding value is a string URL
 # otherwise corresponding value is the respective ActivityType
-
 # available ActivityTypes: 0 is gaming (Playing), 1 is streaming (Streaming), 2 is listening (Listening to),
 # 3 is watching (Watching), 4 is custom, 5 is competing (Competing in)
 BOT_ACTIVITY_STATUSES = {
