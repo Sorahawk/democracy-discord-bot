@@ -10,49 +10,38 @@ bot = discord.Client(intents=intents)
 var_global.BOT_INSTANCE = bot
 
 
+# standard function for the polling tasks that includes standard error handling
+async def polling(func, task, endpoint, keyword):
+	response = 'NO RESPONSE'
+	try:
+		response = requests.get(endpoint, headers=STANDARD_HEADERS).json()
+		await func(response)
+		await error_recovery(keyword)
+
+	except Exception as error:
+		if await error_handler(error, keyword, response):
+			task.stop()
+
+
 @loop(minutes=1)
 async def task_check_major_order():
 	endpoint = f"{BASE_API_URL}/v2/Assignment/War/{WAR_ID}"
-
-	order_details = 'NO RESPONSE'
-	try:
-		order_details = requests.get(endpoint, headers=STANDARD_HEADERS).json()
-		await check_major_order(order_details)
-		await error_recovery('major_order')
-
-	except Exception as error:
-		if await error_handler(error, 'major_order', order_details):
-			task_check_major_order.stop()
+	keyword = 'major_order'
+	await polling(check_major_order, task_check_major_order, endpoint, keyword)
 
 
 @loop(minutes=1)
 async def task_check_global_event():
 	endpoint = f"{BASE_API_URL}/WarSeason/{WAR_ID}/Status"
-
-	war_status = 'NO RESPONSE'
-	try:
-		war_status = requests.get(endpoint, headers=STANDARD_HEADERS).json()
-		await check_global_event(war_status)
-		await error_recovery('global_event')
-
-	except Exception as error:
-		if await error_handler(error, 'global_event', war_status):
-			task_check_global_event.stop()
+	keyword = 'global_event'
+	await polling(check_global_event, task_check_global_event, endpoint, keyword)
 
 
 @loop(minutes=1)
 async def task_check_dispatch():
 	endpoint = f"{BASE_API_URL}/NewsFeed/{WAR_ID}?fromTimeStamp={var_global.LATEST_DISPATCH_TIMESTAMP}"
-
-	dispatches = 'NO RESPONSE'
-	try:
-		dispatches = requests.get(endpoint, headers=STANDARD_HEADERS).json()
-		await check_dispatch(dispatches)
-		await error_recovery('dispatch')
-
-	except Exception as error:
-		if await error_handler(error, 'dispatch', dispatches):
-			task_check_dispatch.stop()
+	keyword = 'dispatch'
+	await polling(check_dispatch, task_check_dispatch, endpoint, keyword)
 
 
 # automatically rotate bot's Discord status every 10 minutes
@@ -107,9 +96,9 @@ async def on_ready():
 		var_global.LATEST_DISPATCH_TIMESTAMP = data
 
 	# start tasks
-	#task_check_dispatch.start()
+	task_check_dispatch.start()
 	task_check_global_event.start()
-	#task_check_major_order.start()
+	task_check_major_order.start()
 	task_rotate_status.start()
 
 
