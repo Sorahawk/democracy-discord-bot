@@ -18,8 +18,7 @@ async def check_major_order(order_details):
 
 		task_description = ''
 		if 'taskDescription' in order_details['setting'] and order_details['setting']['taskDescription'] != order_details['setting']['overrideBrief']:
-			task_description = order_details['setting']['taskDescription']
-			if task_description:  # in case the description is empty, do not add the extra lines
+			if (task_description := order_details['setting']['taskDescription']):  # in case the description is empty, do not add the extra lines
 				task_description += '\n\n'
 
 		message = f"\n{brief}\n\n{task_description}".replace('\n', '\n> ')
@@ -101,8 +100,7 @@ async def check_dispatch(dispatches):
 
 	for dispatch in dispatches:
 		timestamp = dispatch['published']
-		message = dispatch.get('message')
-		if message:
+		if (message := dispatch.get('message')):
 			await send_formed_message(message, 'dispatch_new')
 
 	var_global.LATEST_DISPATCH_TIMESTAMP = str(timestamp + 1)

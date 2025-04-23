@@ -85,13 +85,11 @@ async def on_ready():
 			var_global.MAJOR_ORDER_ID = None
 
 	with open(FILE_NAMES['global_event']) as infile:
-		data = infile.readline().strip()
-		if data:
+		if (data := infile.readline().strip()):
 			var_global.LATEST_GLOBAL_EVENT_IDS = json.loads(data)
 
 	with open(FILE_NAMES['dispatch']) as infile:
-		data = infile.readline().strip()
-		if not data:
+		if not (data := infile.readline().strip()):
 			data = '0'
 		var_global.LATEST_DISPATCH_TIMESTAMP = data
 
