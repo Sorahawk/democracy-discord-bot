@@ -1,4 +1,4 @@
-from import_func import *
+from imports import *
 
 
 # declare bot intents

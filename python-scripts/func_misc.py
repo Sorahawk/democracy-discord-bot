@@ -1,4 +1,4 @@
-from import_lib import *
+from imports import *
 
 
 # initialises an empty file if the specified file does not already exist
