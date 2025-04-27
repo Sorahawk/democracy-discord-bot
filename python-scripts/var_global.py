@@ -11,27 +11,46 @@ LINUX_ABSOLUTE_PATH = '/home/ubuntu/democracy-bot/python-scripts'
 LINUX_SERVICE_NAME = 'democracy-bot.service'
 
 
+
+### INIT ###
+
+BOT_INSTANCE = None
+
+MAIN_CHANNEL = None
+
+
+
 ### DISCORD ###
 
 # ID of default Discord server channel that will receive notifications
 MAIN_CHANNEL_ID = 1205579694913626142
 
-# main channel object, to be initialised when the bot calls on_ready()
-MAIN_CHANNEL = None
-
 # Discord server role name to ping for notifications
 NOTIFY_ROLE_NAME = '<@&1218425149821550682>'
 
 
-### MAIN ###
 
-BOT_INSTANCE = None
+### MAIN ###
 
 # symbol to signify bot commands
 BOT_COMMAND_PREFIX = '.'
 
 # list of bot commands
 BOT_COMMAND_LIST = []
+
+# dictionary of the available Discord statuses for the bot
+# if activity (key) is meant to be a 'Streaming' activity, then corresponding value is a string URL
+# otherwise corresponding value is the respective ActivityType
+# available ActivityTypes: 0 is gaming (Playing), 1 is streaming (Streaming), 2 is listening (Listening to),
+# 3 is watching (Watching), 4 is custom, 5 is competing (Competing in)
+BOT_ACTIVITY_STATUSES = {
+	"Strohmann News": 2,
+	"the Galactic War unfold": 3,
+}
+
+
+
+### API ###
 
 # base URL for the API
 BASE_API_URL = 'https://api.live.prod.thehelldiversgame.com/api'
@@ -42,11 +61,34 @@ STANDARD_HEADERS = {'Accept-Language': 'en-US'}
 # ID of the current War Season
 WAR_ID = 801
 
+# list of names for the different entity types
+ENTITY_TYPES = ['major_order', 'global_event', 'dispatch']
+
+# dictionary of booleans indicating if errors have occurred for the loop tasks
+TASK_ERRORS = {}
+for entity_type in ENTITY_TYPES:
+	TASK_ERRORS[entity_type] = False
+
+
+
+### DISPATCH ###
+
 # timestamp of latest dispatch sent
 LATEST_DISPATCH_TIMESTAMP = 0
 
+
+
+### EVENTS ###
+
 # list of latest global event IDs
 LATEST_GLOBAL_EVENT_IDS = []
+
+# string of the latest event
+LATEST_EVENT_STRING = None
+
+
+
+### MAJOR ORDER ###
 
 # ID of latest major order
 MAJOR_ORDER_ID = None
@@ -58,16 +100,28 @@ MAJOR_ORDER_PAYLOAD = None
 # i.e. the expiry time given when the major order is issued is almost always slightly off from the time it actually ends up expiring at
 MAJOR_ORDER_MESSAGE = None
 
-# string of the latest event
-LATEST_EVENT_STRING = None
 
-# list of names for the different entity types
-ENTITY_TYPES = ['major_order', 'global_event', 'dispatch']
 
-# dictionary of booleans indicating if errors have occurred for the loop tasks
-TASK_ERRORS = {}
-for entity_type in ENTITY_TYPES:
-	TASK_ERRORS[entity_type] = False
+### MESSAGES ###
+
+# standard emoji prepended and appended to most voicelines
+ATTENTION_EMOJI = '🚨'
+
+# standard footer to end off messages
+MESSAGE_FOOTER = '*----------END OF TRANSMISSION----------*'
+
+# dictionary of messages used by the bot
+STANDARD_VOICELINES = {
+	'major_order_new': 'NEW MAJOR ORDER RECEIVED',
+	'global_event_new': 'NEW EVENT DETECTED',
+	'dispatch_new': 'DISPATCH RECEIVED',
+}
+for key, value in STANDARD_VOICELINES.items():
+	STANDARD_VOICELINES[key] = f'**{ATTENTION_EMOJI}   {value}   {ATTENTION_EMOJI}**'
+
+
+
+### FILES ###
 
 # dictionary of names of storage files used
 FILE_NAMES = {
@@ -90,29 +144,3 @@ else:
 	parent_directory = '../'
 for key, value in FILE_NAMES.items():
 	FILE_NAMES[key] = parent_directory + value
-
-
-# standard emoji prepended and appended to most voicelines
-ATTENTION_EMOJI = '🚨'
-
-# standard footer to end off messages
-MESSAGE_FOOTER = '*----------END OF TRANSMISSION----------*'
-
-# dictionary of messages used by the bot
-STANDARD_VOICELINES = {
-	'major_order_new': 'NEW MAJOR ORDER RECEIVED',
-	'global_event_new': 'NEW EVENT DETECTED',
-	'dispatch_new': 'DISPATCH RECEIVED',
-}
-for key, value in STANDARD_VOICELINES.items():
-	STANDARD_VOICELINES[key] = f'**{ATTENTION_EMOJI}   {value}   {ATTENTION_EMOJI}**'
-
-# dictionary of the available Discord statuses for the bot
-# if activity (key) is meant to be a 'Streaming' activity, then corresponding value is a string URL
-# otherwise corresponding value is the respective ActivityType
-# available ActivityTypes: 0 is gaming (Playing), 1 is streaming (Streaming), 2 is listening (Listening to),
-# 3 is watching (Watching), 4 is custom, 5 is competing (Competing in)
-BOT_ACTIVITY_STATUSES = {
-	"Strohmann News": 2,
-	"the Galactic War unfold": 3,
-}
