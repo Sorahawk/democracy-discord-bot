@@ -11,8 +11,9 @@ async def send_formed_message(message, header_voiceline_key):
 
 
 # standard task error handler
-async def error_handler(traceback_error, entity_type, payload):
-	error_string = f"Unexpected error in `check_{entity_type}()`: {traceback_error}"
+async def error_handler(e, entity_type, payload):
+	full_trace = ''.join(traceback.format_exception(type(e), e, e.__traceback__))
+	error_string = f"Unexpected error in `check_{entity_type}()`: {full_trace}"
 
 	if "RemoteDisconnected" in error_string:  # ignore sporadic connection issues
 		return False

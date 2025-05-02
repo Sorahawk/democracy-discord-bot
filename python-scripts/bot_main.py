@@ -18,8 +18,8 @@ async def polling(func, task, endpoint, keyword):
 		await func(response)
 		await error_recovery(keyword)
 
-	except Exception as error:
-		if await error_handler(error, keyword, response):
+	except Exception as e:
+		if await error_handler(e, keyword, response):
 			task.stop()
 
 
