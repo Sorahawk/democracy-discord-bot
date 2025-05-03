@@ -1,3 +1,5 @@
+
+# external libraries
 import os
 import re
 import json
@@ -10,11 +12,11 @@ import subprocess
 from discord.ext.tasks import loop
 
 
+# internal scripts - order of import matters; load the scripts in order of lowest to highest dependency
 import var_global
 from var_global import *
 from var_secret import *
 
 from func_misc import *
-from func_async import *
 
 from bot_tasks import *
