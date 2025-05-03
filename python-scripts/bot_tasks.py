@@ -12,14 +12,11 @@ async def check_major_order(order_details):
 		discord_timestamp = f"<t:{expiry_timestamp}:F>"
 
 		# the overrideBrief and taskDescription values are somehow not returned in the response every now and then
-		brief = ''
-		if 'overrideBrief' in order_details['setting']:
-			brief = order_details['setting']['overrideBrief']
+		brief = order_details['setting'].get('overrideBrief', '')
 
-		task_description = ''
-		if 'taskDescription' in order_details['setting'] and order_details['setting']['taskDescription'] != order_details['setting']['overrideBrief']:
-			if (task_description := order_details['setting']['taskDescription']):  # in case the description is empty, do not add the extra lines
-				task_description += '\n\n'
+		task_description = order_details['setting'].get('taskDescription', '')
+		if task_description and order_details['setting']['taskDescription'] != order_details['setting']['overrideBrief']:
+			task_description += '\n\n'
 
 		message = f"\n{brief}\n\n{task_description}".replace('\n', '\n> ')
 		message = convert_tags_to_bold(message)
@@ -67,10 +64,7 @@ async def check_global_event(war_status):
 		with open(FILE_NAMES['global_event'], 'w') as outfile:
 			outfile.write(json.dumps(var_global.LATEST_GLOBAL_EVENT_IDS))
 
-		message = ''
-		if 'title' in event_details:
-			message = convert_tags_to_bold(event_details['title'])
-
+		if (message := convert_tags_to_bold(event_details.get('title', ''))):
 			# add on MO prefix to subheader for MO events
 			# flag 1 is briefing, 2 is success and 3 is failed
 			if event_details['flag'] in [1, 2, 3]:
@@ -80,7 +74,7 @@ async def check_global_event(war_status):
 				message = f"**{message}**"
 
 		# append message contents if not empty
-		if 'message' in event_details and event_details['message']:
+		if event_details.get('message'):
 			message += f"\n\n{event_details['message']}"
 
 		if not message.strip():
