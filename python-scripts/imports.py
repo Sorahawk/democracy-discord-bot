@@ -7,6 +7,7 @@ import time
 import random
 import discord
 import requests
+import traceback
 import subprocess
 
 from discord.ext.tasks import loop
