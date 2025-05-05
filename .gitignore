@@ -2,5 +2,4 @@ __pycache__/
 
 python-scripts/var_secret.py
 
-data-files/*.txt
-data-files/latest_global_event.json
+data-files/*
