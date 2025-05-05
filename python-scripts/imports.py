@@ -18,6 +18,6 @@ import var_global
 from var_global import *
 from var_secret import *
 
-from func_misc import *
+from func_utils import *
 
 from bot_tasks import *
