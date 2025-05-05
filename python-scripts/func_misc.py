@@ -44,7 +44,7 @@ async def error_handler(e, entity_type, payload):
 
 	# stop task from re-execution after one retry
 	if var_global.TASK_ERRORS[entity_type]:
-		await var_global.MAIN_CHANNEL.send(f"`check_{entity_type}()` has failed twice. Disabling task for further investigation.")
+		await var_global.MAIN_CHANNEL.send(f"`check_{entity_type}()` has failed twice. Disabling task pending further investigation.")
 		return True
 	else:
 		var_global.TASK_ERRORS[entity_type] = True
