@@ -7,7 +7,6 @@ intents = discord.Intents.all()
 
 # initialise client
 bot = discord.Client(intents=intents)
-var_global.BOT_INSTANCE = bot
 
 
 # standard function for the polling tasks that includes standard error handling
@@ -54,7 +53,7 @@ async def task_rotate_status():
 	else:
 		activity_status = discord.Activity(type=activity_type, name=activity)
 
-	await var_global.BOT_INSTANCE.change_presence(activity=activity_status)
+	await bot.change_presence(activity=activity_status)
 
 
 @bot.event

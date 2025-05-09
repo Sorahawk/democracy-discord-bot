@@ -14,8 +14,6 @@ LINUX_SERVICE_NAME = 'democracy-bot.service'
 
 ### INIT ###
 
-BOT_INSTANCE = None
-
 MAIN_CHANNEL = None
 
 
