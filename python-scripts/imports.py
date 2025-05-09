@@ -4,9 +4,9 @@ import os
 import re
 import json
 import time
+import httpx
 import random
 import discord
-import requests
 import traceback
 import subprocess
 

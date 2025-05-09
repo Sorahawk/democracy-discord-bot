@@ -13,7 +13,7 @@ bot = discord.Client(intents=intents)
 async def polling(func, task, endpoint, keyword):
 	response = 'NO RESPONSE'
 	try:
-		response = requests.get(endpoint, headers=STANDARD_HEADERS).json()
+		response = (await var_global.ASYNC_CLIENT.get(endpoint, headers=STANDARD_HEADERS)).json()
 		await func(response)
 		await error_recovery(keyword)
 
@@ -67,6 +67,9 @@ async def on_ready():
 
 	# initialise global main channel object
 	var_global.MAIN_CHANNEL = bot.get_channel(MAIN_CHANNEL_ID)
+
+	# initialise HTTP async clients
+	var_global.ASYNC_CLIENT = httpx.AsyncClient(http2=True, timeout=60)
 
 	# initialise empty files if they do not already exist
 	for entity_type in ENTITY_TYPES:
