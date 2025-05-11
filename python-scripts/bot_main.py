@@ -80,7 +80,7 @@ async def on_ready():
 		data = infile.readline().strip().split(',')
 		var_global.MAJOR_ORDER_ID = data[0]
 
-		# attempt to retrieve major order message, and if it cannot be retrieved, wipe the major order ID so that the bot will output another message
+		# try to retrieve major order message, and if it fails, wipe the major order ID so that the bot will output another message
 		try:
 			var_global.MAJOR_ORDER_MESSAGE = await var_global.MAIN_CHANNEL.fetch_message(data[-1])
 		except:
