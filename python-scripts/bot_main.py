@@ -113,15 +113,17 @@ async def on_message(message):
 	# process commands
 	contents = message.content[prefix_length:].lower().split()
 
-	# update command
-	if contents[0] in ['update'] and sys.platform == 'linux':
-		await message.channel.send('Receiving updates from the Ministry of Truth.')
+	# check for any valid command if the message starts with the prefix symbol
+	result = check_command(message.content[prefix_length:])
+	if not result:
+		return
 
-		# reset any changes that could have been made to the project folder and pull latest code
-		subprocess.run(f"cd {LINUX_ABSOLUTE_PATH} && git reset --hard HEAD && git clean -d -f && git pull", shell=True)
+	command_method, user_input = result[0], result[1]
 
-		# restart service
-		subprocess.run(f"sudo systemctl restart {LINUX_SERVICE_NAME}", shell=True)
+	# check for presence of any command flags
+	# in the process also removes any excess whitespace
+	flag_presence, user_input = check_flags(user_input)
+	await eval(command_method)(message, user_input, flag_presence)
 
 
 # start bot

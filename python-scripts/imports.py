@@ -1,5 +1,6 @@
 
 # external libraries
+import io
 import os
 import re
 import json
@@ -21,3 +22,5 @@ from var_secret import *
 from func_utils import *
 
 from bot_tasks import *
+
+from bot_methods import *

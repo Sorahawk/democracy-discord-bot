@@ -36,7 +36,7 @@ NOTIFY_ROLE_NAME = '<@&1218425149821550682>'
 BOT_COMMAND_PREFIX = '.'
 
 # list of bot commands
-BOT_COMMAND_LIST = []
+BOT_COMMAND_LIST = ['status']
 
 # dictionary of command flags
 # each flag can only be a single letter
