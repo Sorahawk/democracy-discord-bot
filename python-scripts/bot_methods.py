@@ -8,8 +8,8 @@ from imports import *
 # display current state of article feeds
 async def status_method(message, user_input, flag_presence):
 	status_list = [
-		'LATEST_DISPATCH_TIMESTAMP',
 		'MAJOR_ORDER_ID',
+		'LATEST_DISPATCH_TIMESTAMP',
 		'LATEST_GLOBAL_EVENT_IDS',
 	]
 
