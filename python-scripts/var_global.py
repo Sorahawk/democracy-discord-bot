@@ -25,9 +25,6 @@ ASYNC_CLIENT = None
 # ID of default Discord server channel that will receive notifications
 MAIN_CHANNEL_ID = 1205579694913626142
 
-# Discord server role name to ping for notifications
-NOTIFY_ROLE_NAME = '<@&1218425149821550682>'
-
 
 
 ### MAIN ###
