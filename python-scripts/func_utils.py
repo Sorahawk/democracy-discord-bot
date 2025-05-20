@@ -37,6 +37,11 @@ def check_flags(user_input):
 	return flag_presence, user_input
 
 
+# returns a Discord File object
+def generate_file(content, filename):
+	return discord.File(io.StringIO(content), filename=filename)
+
+
 # initialises an empty file if the specified file does not already exist
 def initialise_file_if_empty(entity_type):
 	if not os.path.exists(FILE_NAMES[entity_type]):
@@ -75,8 +80,8 @@ async def error_handler(e, entity_type, payload):
 		return False
 
 	error_string = f"Unexpected error in `check_{entity_type}()`:"
-	await var_global.MAIN_CHANNEL.send(error_string, file=discord.File(io.StringIO(full_trace), filename="traceback.txt"))
-	await var_global.MAIN_CHANNEL.send('Payload:', file=discord.File(io.StringIO(json.dumps(payload)), filename=f"{entity_type}.json"))
+	await var_global.MAIN_CHANNEL.send(error_string, file=generate_file(full_trace, 'traceback.txt'))
+	await var_global.MAIN_CHANNEL.send('Payload:', file=generate_file(json.dumps(payload), f"{entity_type}.json"))
 
 	# stop task from re-execution after one retry
 	if var_global.TASK_ERRORS[entity_type]:
