@@ -39,6 +39,9 @@ BOT_COMMAND_LIST = ['status', 'update']
 # each flag can only be a single letter
 BOT_COMMAND_FLAGS = {}
 
+# string reply when bot receives update command
+BOT_UPDATE_VOICELINE = 'Receiving updates from the Ministry of Truth.'
+
 
 # dictionary of the available Discord statuses for the bot
 # if activity (key) is meant to be a 'Streaming' activity, then corresponding value is a string URL
