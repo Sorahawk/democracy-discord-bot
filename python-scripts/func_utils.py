@@ -68,15 +68,15 @@ async def send_formed_message(message, header_voiceline_key):
 # standard task error handler
 async def error_handler(e, entity_type, payload):
 	full_trace = ''.join(traceback.format_exception(type(e), e, e.__traceback__))
-	error_string = f"Unexpected error in `check_{entity_type}()`: {full_trace}"
-
-	if "RemoteDisconnected" in error_string:  # ignore sporadic connection issues
+	
+	if "RemoteDisconnected" in full_trace:  # ignore sporadic connection issues
 		return False
-	elif "Expecting value: line 1 column 1 (char 0)" in error_string:  # ignore JSONDecodeError
+	elif "Expecting value: line 1 column 1 (char 0)" in full_trace:  # ignore JSONDecodeError
 		return False
 
-	await var_global.MAIN_CHANNEL.send(error_string)
-	await var_global.MAIN_CHANNEL.send(f"Payload: ```{payload}```")
+	error_string = f"Unexpected error in `check_{entity_type}()`:"
+	await var_global.MAIN_CHANNEL.send(error_string, file=discord.File(io.StringIO(full_trace), filename="traceback.txt"))
+	await var_global.MAIN_CHANNEL.send('Payload:', file=discord.File(io.StringIO(json.dumps(payload)), filename=f"{entity_type}.json"))
 
 	# stop task from re-execution after one retry
 	if var_global.TASK_ERRORS[entity_type]:

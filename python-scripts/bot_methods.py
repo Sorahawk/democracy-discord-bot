@@ -22,7 +22,7 @@ async def update_method(message, user_input, flag_presence):
 	if sys.platform != 'linux':
 		return
 
-	await message.channel.send('Popping into the tent for a bit!')
+	await message.channel.send('Receiving updates from the Ministry of Truth.')
 
 	# reset any potential changes to project folder, then pull latest code
 	subprocess.run(f"cd {LINUX_ABSOLUTE_PATH} && git reset --hard HEAD && git clean -d -f && git pull", shell=True)

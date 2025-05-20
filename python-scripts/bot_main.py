@@ -69,7 +69,7 @@ async def on_ready():
 	var_global.MAIN_CHANNEL = bot.get_channel(MAIN_CHANNEL_ID)
 
 	# initialise HTTP async clients
-	var_global.ASYNC_CLIENT = httpx.AsyncClient(http2=True, timeout=60)
+	var_global.ASYNC_CLIENT = httpx.AsyncClient(http2=True)
 
 	# initialise empty files if they do not already exist
 	for entity_type in ENTITY_TYPES:
