@@ -124,7 +124,7 @@ STANDARD_VOICELINES = {
 	'dispatch_new': 'DISPATCH RECEIVED',
 }
 for key, value in STANDARD_VOICELINES.items():
-	STANDARD_VOICELINES[key] = f'**{ATTENTION_EMOJI}   {value}   {ATTENTION_EMOJI}**'
+	STANDARD_VOICELINES[key] = f"**{ATTENTION_EMOJI}   {value}   {ATTENTION_EMOJI}**"
 
 
 

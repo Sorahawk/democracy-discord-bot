@@ -13,7 +13,7 @@ def check_command(user_input):
 	if keyword in BOT_COMMAND_LIST:
 		# remove command word from user input
 		sliced_input = re.sub(keyword, '', user_input, flags=re.IGNORECASE).strip()
-		return f'{keyword}_method', sliced_input
+		return f"{keyword}_method", sliced_input
 
 
 # checks for presence of any command flags in user input
@@ -22,10 +22,10 @@ def check_command(user_input):
 # second, the user input stripped of flags
 def check_flags(user_input):
 	# insert surrounding whitespace so leading and trailing flags can still be detected
-	user_input = f' {user_input} '
+	user_input = f" {user_input} "
 
 	# generate flag presence dictionary
-	flag_presence = {flag: True if f' -{letter} ' in user_input.lower() else False for flag, letter in BOT_COMMAND_FLAGS.items()}
+	flag_presence = {flag: True if f" -{letter} " in user_input.lower() else False for flag, letter in BOT_COMMAND_FLAGS.items()}
 
 	# remove all 'flags', a dash followed by a single letter, even if they are not valid
 	# each whitespace within input is duplicated so that all present flags can be matched by the regex properly
