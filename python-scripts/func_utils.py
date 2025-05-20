@@ -76,7 +76,7 @@ async def error_handler(e, entity_type, payload):
 
 	error_string = f"Unexpected error in `check_{entity_type}()`:"
 	await var_global.MAIN_CHANNEL.send(error_string, file=discord.File(io.StringIO(full_trace), filename="traceback.txt"))
-	await var_global.MAIN_CHANNEL.send(file=discord.File(io.StringIO(payload), filename="payload.txt"))
+	await var_global.MAIN_CHANNEL.send(file=discord.File(io.StringIO(json.dumps(payload)), filename="payload.txt"))
 
 	# stop task from re-execution after one retry
 	if var_global.TASK_ERRORS[entity_type]:
