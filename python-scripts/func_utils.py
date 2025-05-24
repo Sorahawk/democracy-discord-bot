@@ -83,7 +83,7 @@ async def error_handler(e, entity_type, payload):
 	await var_global.MAIN_CHANNEL.send(error_string, file=generate_file(full_trace, 'traceback.txt'))
 	
 	if payload != 'NO RESPONSE':
-		await var_global.MAIN_CHANNEL.send('Payload:', file=generate_file(json.dumps(payload), f"{entity_type}.json"))
+		await var_global.MAIN_CHANNEL.send("Payload:", file=generate_file(json.dumps(payload), f"{entity_type}.json"))
 
 	# stop task from re-execution after one retry
 	if var_global.TASK_ERRORS[entity_type]:

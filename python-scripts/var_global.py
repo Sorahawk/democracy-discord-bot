@@ -40,7 +40,7 @@ BOT_COMMAND_LIST = ['status', 'update']
 BOT_COMMAND_FLAGS = {}
 
 # string reply when bot receives update command
-BOT_UPDATE_VOICELINE = 'Receiving updates from the Ministry of Truth.'
+BOT_UPDATE_VOICELINE = "Receiving updates from the Ministry of Truth."
 
 
 # dictionary of the available Discord statuses for the bot
@@ -114,14 +114,14 @@ MAJOR_ORDER_MESSAGE = None
 ATTENTION_EMOJI = '🚨'
 
 # standard footer to end off messages
-MESSAGE_FOOTER = '*----------END OF TRANSMISSION----------*'
+MESSAGE_FOOTER = "*----------END OF TRANSMISSION----------*"
 
 
 # dictionary of messages used by the bot
 STANDARD_VOICELINES = {
-	'major_order_new': 'NEW MAJOR ORDER RECEIVED',
-	'global_event_new': 'NEW EVENT DETECTED',
-	'dispatch_new': 'DISPATCH RECEIVED',
+	'major_order_new': "NEW MAJOR ORDER RECEIVED",
+	'global_event_new': "NEW EVENT DETECTED",
+	'dispatch_new': "DISPATCH RECEIVED",
 }
 for key, value in STANDARD_VOICELINES.items():
 	STANDARD_VOICELINES[key] = f"**{ATTENTION_EMOJI}   {value}   {ATTENTION_EMOJI}**"
