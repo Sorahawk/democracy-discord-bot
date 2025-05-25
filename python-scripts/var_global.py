@@ -16,8 +16,6 @@ LINUX_SERVICE_NAME = 'democracy-bot.service'
 
 MAIN_CHANNEL = None
 
-ASYNC_CLIENT = None
-
 
 
 ### DISCORD ###
