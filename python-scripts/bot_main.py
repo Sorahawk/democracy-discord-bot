@@ -74,14 +74,17 @@ async def on_ready():
 
 	# read in variables from files
 	with open(FILE_NAMES['major_order']) as infile:
-		data = infile.readline().strip().split(',')
-		var_global.MAJOR_ORDER_ID = data[0]
+		try:
+			var_global.MAJOR_ORDER_IDS = (data := json.load(infile))
+		except:
+			data = {}
 
 		# try to retrieve major order message, and if it fails, wipe the major order ID so that the bot will output another message
-		try:
-			var_global.MAJOR_ORDER_MESSAGE = await var_global.MAIN_CHANNEL.fetch_message(data[-1])
-		except:
-			var_global.MAJOR_ORDER_ID = None
+		for order_id, message_id in data.items():
+			try:
+				await var_global.MAIN_CHANNEL.fetch_message(message_id)
+			except:
+				del var_global.MAJOR_ORDER_IDS[order_id]
 
 	with open(FILE_NAMES['global_event']) as infile:
 		if (data := infile.readline().strip()):

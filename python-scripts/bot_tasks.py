@@ -2,49 +2,47 @@ from imports import *
 
 
 # outputs new major orders and updates expiry time of existing major orders
-async def check_major_order(order_details):
-	if order_details:
-		order_details = order_details[0]
-		order_id = str(order_details['id32'])
+async def check_major_order(order_payload):
+	if order_payload:
+		for order_details in order_payload:
+			order_id = str(order_details['id32'])
 
-		# form major order string
-		expiry_timestamp = int(time.time()) + order_details['expiresIn']
-		discord_timestamp = f"<t:{expiry_timestamp}:F>"
+			# form major order string
+			expiry_timestamp = int(time.time()) + order_details['expiresIn']
+			discord_timestamp = f"<t:{expiry_timestamp}:F>"
 
-		# the overrideBrief and taskDescription values are somehow not returned in the response every now and then
-		brief = order_details['setting'].get('overrideBrief', '')
+			# the overrideBrief and taskDescription values are somehow not returned in the response every now and then
+			brief = order_details['setting'].get('overrideBrief', '')
 
-		task_description = order_details['setting'].get('taskDescription', '')
-		if task_description and order_details['setting']['taskDescription'] != order_details['setting']['overrideBrief']:
-			task_description += '\n\n'
+			task_description = order_details['setting'].get('taskDescription', '')
+			if task_description and order_details['setting']['taskDescription'] != order_details['setting']['overrideBrief']:
+				task_description += '\n\n'
 
-		message = f"\n{brief}\n\n{task_description}".replace('\n', '\n> ')
-		message = convert_tags_to_bold(message)
-		message += f"Order Expiry: {discord_timestamp}"  # append timestamp only after checking for HTML tags
+			message = f"\n{brief}\n\n{task_description}".replace('\n', '\n> ')
+			message = convert_tags_to_bold(message)
+			message += f"Order Expiry: {discord_timestamp}"  # append timestamp only after checking for HTML tags
 
-		header = STANDARD_VOICELINES['major_order_new']
-		major_order_string = f"{header}\n{message}\n\n{MESSAGE_FOOTER}"
+			header = STANDARD_VOICELINES['major_order_new']
+			major_order_string = f"{header}\n{message}\n\n{MESSAGE_FOOTER}"
 
-		# if major order message was sent before, edit message with the updated expiry time
-		if order_id == var_global.MAJOR_ORDER_ID and var_global.MAJOR_ORDER_MESSAGE:
-			try:
-				await var_global.MAJOR_ORDER_MESSAGE.edit(content=major_order_string)
-			except:
-				# reset global variables if Discord message cannot be located
-				reset_major_order_var()
-				raise Exception('Discord message for current Major Order cannot be found.')
+			# if major order message was sent before, edit message with the updated expiry time
+			if order_id in var_global.MAJOR_ORDER_IDS:
+				try:
+					message_id = var_global.MAJOR_ORDER_IDS[order_id]
+					await var_global.MAIN_CHANNEL.fetch_message(message_id).edit(content=major_order_string)
+				except:
+					# reset global variables if Discord message cannot be located
+					reset_major_order_var()
+					raise Exception('Discord message for current Major Order cannot be found.')
 
-		else:  # otherwise, output new major order
-			sent_message = await var_global.MAIN_CHANNEL.send(major_order_string)
+			else:  # otherwise, output new major order
+				sent_message = await var_global.MAIN_CHANNEL.send(major_order_string)
 
-			# update variables
-			var_global.MAJOR_ORDER_ID = order_id
-			var_global.MAJOR_ORDER_MESSAGE = sent_message
-			var_global.MAJOR_ORDER_PAYLOAD = order_details
+				# update variables
+				var_global.MAJOR_ORDER_IDS[order_id] = sent_message.id
 
-			with open(FILE_NAMES['major_order'], 'w') as outfile:
-				outfile.write(f"{order_id}, {sent_message.id}")
-		return
+				with open(FILE_NAMES['major_order'], 'w') as outfile:
+					json.dump(var_global.MAJOR_ORDER_IDS, outfile)
 
 
 # outputs new global events

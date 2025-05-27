@@ -94,15 +94,9 @@ LATEST_EVENT_STRING = None
 
 ### MAJOR ORDER ###
 
-# ID of latest major order
-MAJOR_ORDER_ID = None
-
-# entire JSON payload of latest major order
-MAJOR_ORDER_PAYLOAD = None
-
-# variable to store Discord message object so that major order expiry time can constantly updated since it usually doesn't count down consistently
-# i.e. the expiry time given when the major order is issued is almost always slightly off from the time it actually ends up expiring at
-MAJOR_ORDER_MESSAGE = None
+# dictionary of active major orders
+# key is the ID of each major order, while corresponding value is the Discord message object for that major order
+MAJOR_ORDER_IDS = {}
 
 
 

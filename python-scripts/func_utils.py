@@ -56,9 +56,7 @@ def convert_tags_to_bold(message):
 # resets major order global variables
 def reset_major_order_var():
 	open(FILE_NAMES['major_order'], 'w').close()
-	var_global.MAJOR_ORDER_ID = None
-	var_global.MAJOR_ORDER_PAYLOAD = None
-	var_global.MAJOR_ORDER_MESSAGE = None
+	var_global.MAJOR_ORDER_IDS = {}
 
 
 # sends message following the standard format of header - indented message - footer
