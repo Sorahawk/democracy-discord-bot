@@ -32,9 +32,7 @@ async def check_major_order(order_payload):
 					message = await var_global.MAIN_CHANNEL.fetch_message(message_id)
 					await message.edit(content=major_order_string)
 				except:
-					# reset global variables if Discord message cannot be located
 					del var_global.MAJOR_ORDER_IDS[order_id]
-					raise Exception('Discord message for current Major Order cannot be found.')
 
 			else:  # otherwise, output new major order
 				sent_message = await var_global.MAIN_CHANNEL.send(major_order_string)

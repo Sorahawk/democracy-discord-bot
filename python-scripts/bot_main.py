@@ -22,21 +22,21 @@ async def polling(func, task, endpoint, keyword):
 			task.stop()
 
 
-@loop(minutes=1)
+@loop(minutes=4)
 async def task_check_major_order():
 	endpoint = f"{BASE_API_URL}/v2/Assignment/War/{WAR_ID}"
 	keyword = 'major_order'
 	await polling(check_major_order, task_check_major_order, endpoint, keyword)
 
 
-@loop(minutes=1)
+@loop(minutes=3)
 async def task_check_global_event():
 	endpoint = f"{BASE_API_URL}/WarSeason/{WAR_ID}/Status"
 	keyword = 'global_event'
 	await polling(check_global_event, task_check_global_event, endpoint, keyword)
 
 
-@loop(minutes=1)
+@loop(minutes=2)
 async def task_check_dispatch():
 	endpoint = f"{BASE_API_URL}/NewsFeed/{WAR_ID}?fromTimeStamp={var_global.LATEST_DISPATCH_TIMESTAMP}"
 	keyword = 'dispatch'
@@ -80,7 +80,7 @@ async def on_ready():
 			data = {}
 
 		# try to retrieve major order message, and if it fails, wipe the major order ID so that the bot will output another message
-		for order_id, message_id in data.items():
+		for order_id, message_id in data.copy().items():
 			try:
 				await var_global.MAIN_CHANNEL.fetch_message(message_id)
 			except:
