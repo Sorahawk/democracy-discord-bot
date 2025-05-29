@@ -69,9 +69,7 @@ WAR_ID = 801
 ENTITY_TYPES = ['major_order', 'global_event', 'dispatch']
 
 # dictionary of booleans indicating if errors have occurred for the loop tasks
-TASK_ERRORS = {}
-for entity_type in ENTITY_TYPES:
-	TASK_ERRORS[entity_type] = False
+TASK_ERRORS = {entity_type: False for entity_type in ENTITY_TYPES}
 
 
 
